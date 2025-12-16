@@ -7,7 +7,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install && npm install nodemon
 
 # 2. Copia o projeto inteiro (incluindo a pasta prisma)
 COPY . . 
@@ -18,4 +18,4 @@ RUN npx prisma generate
 EXPOSE 8080
 
 # 4. O db push e o servidor rodam apenas quando o container iniciar
-CMD npx prisma db push && tsx watch src/server.ts
+CMD npx prisma db push && npm run dev src/server.ts
